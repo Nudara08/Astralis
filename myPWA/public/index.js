@@ -2,7 +2,7 @@ const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database(".database/datasource.db");
 
 // Fetch events from the database
-fetch('/events') // Adjust the endpoint as necessary
+fetch('"http://localhost:5000/api/Events') // Adjust the endpoint as necessary
     .then(response => response.json())
     .then(events => {
         const eventContainer = document.querySelector('.event-container');
@@ -38,25 +38,6 @@ fetch('/events') // Adjust the endpoint as necessary
             console.log(err);
         }
     });
-
-// New code to fetch events and display them as cards
-fetch('/events') // Adjust the endpoint as necessary
-    .then(response => response.json())
-    .then(events => {
-        const eventContainer = document.querySelector('.event-container');
-        events.forEach(event => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <img src="${event.image}" alt="${event.title}" class="card--avatar">
-                <h2 class="card--title">${event.title}</h2>
-                <p>${event.description}</p>
-                <a href="${event.link}" class="card--link">View Event</a>
-            `;
-            eventContainer.appendChild(card);
-        });
-    })
-    .catch(error => console.error('Error fetching events:', error));
 
 const express = require('express');
 const path = require('path');

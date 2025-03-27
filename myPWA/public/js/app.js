@@ -10,30 +10,39 @@ document.addEventListener("DOMContentLoaded", function () {
     closeBtn.addEventListener("click", function () {
         sidenav.classList.toggle("open"); // Toggle sidebar visibility
     });
-});
+    });
 
-document.addEventListener("DOMContentLoaded", async function () {
-    const container = document.querySelector(".container");
+let result = "";
+fetch("http://localhost:5000/api/Events")
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function (data) {
+        appendData(data);
+    })
+    .catch(function (err) {
+        console.log("error: " + err);
+    });
 
-    try {
-        const response = await fetch("http://localhost:5000/api/items"); // Fetch data
-        const items = await response.json(); // Convert to JSON
+function appendData(data) {
+    data.forEach(({ eventID, name, hyperlink, about, image, event_date, time } = rows) => {
+        result += `
+        <div class="card">
+        <h1 class="card-name">${name}</h1>
+        <p class="card-date">${event_date}</p>
+        <p class="card-time">${time}</p>
+        <a class="card-link" href="${hyperlink}"><button class="btn">Read More</button></a>
+        </div>
+        `;
+    });
+    document.querySelector(".container").innerHTML = result;
+}
 
-        container.innerHTML = items
-            .map(
-                (item) => `
-                <div class="card">
-                    <img src="${item.image}" alt="${item.name}" class="card--avatar">
-                    <h2 class="card--title">${item.name}</h2>
-                    <p>Price: $${item.price}</p>
-                    <p>${item.description}</p>
-                    <a href="#" class="card--link">Buy Now</a>
-                </div>
-            `
-            )
-            .join("");
-    } catch (error) {
-        console.error("Error fetching items:", error);
-    }
-});
-
+if ("serviceworker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceworker
+            .register("js/serviceworker.js")
+            .then((res) => console.log("service worker registered"))
+            .catch((err) => console.log("service worker not registered", err));
+    });
+}

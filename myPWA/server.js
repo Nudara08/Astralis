@@ -74,3 +74,21 @@ app.get("/manifest.json", (req, res) => {
 app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"));
 });
+
+app.get("/event/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "public/event.html"));
+});
+
+app.get("/api/event/:id", (req, res) => {
+    const id = req.params.id;
+    db.get("SELECT * FROM Events WHERE id = ?", [id], (err, row) => {
+        if (err) {
+            console.error("Database error:", err);
+            return res.status(500).json({ error: err.message });
+        }
+        if (!row) {
+            return res.status(404).json({ error: "Event not found" });
+        }
+        res.json(row);
+    });
+});

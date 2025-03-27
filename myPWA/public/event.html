@@ -71,14 +71,24 @@
 </head>
 <body>
     <div class="container">
-        <h1>Meteor Shower</h1>
-        <div class="image-placeholder">Picture</div>
-        <div class="event-info">
-            <p><strong>Event name:</strong> Meteor Shower</p>
-            <p><strong>Event date/time:</strong> 13/02/2024 21:30</p>
-            <p>Some body text here explaining what a meteor shower is and tips and tricks for the audience on the best way to experience this event.</p>
-        </div>
-        <div class="event-link">Event Page</div>
+        
     </div>
+    <script>
+        fetch("http://localhost:5000/api" + window.location.pathname)
+        .then(response => response.json())
+        .then(events => {
+            events.forEach(event => {
+                document.querySelector(".contaier").innerHTML = `
+                    <h1>${event.name}</h1>
+                    <div class="image-placeholder">Picture</div>
+                    <div class="event-info">
+                        <p><strong>Event name:</strong>${event.name}</p>
+                        <p><strong>Event date/time:</strong>${event.event_date}/${event.time}</p>
+                        <p>Some body text here explaining what a meteor shower is and tips and tricks for the audience on the best way to experience this event.</p>
+                    </div>
+                `
+            })
+        })
+    </script>
 </body>
 </html>

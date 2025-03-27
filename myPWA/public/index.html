@@ -75,7 +75,7 @@
                     row.innerHTML = `
                         <td>${event.eventID}</td>
                         <td>${event.name}</td>
-                        <td><a href="${event.hyperlink}" target="_blank">Link</a></td>
+                        <td><a href="${window.location.hostname + "/event/" + event.eventID}" target="_blank">Link</a></td>
                         <td>${event.about}</td>
                         <td><img src="${event.image}" alt="Event Image" width="50"></td>
                         <td>${event.event_date}</td>

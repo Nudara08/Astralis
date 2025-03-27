@@ -19,6 +19,7 @@ body {
     text-align: left;
     margin-left: 0;
     padding-left: 1rem;
+    color: rgb(135, 171, 143);
 }
 
 main {   
@@ -122,7 +123,7 @@ nav h1 {
 header {
     display: flex;
     align-items: center;
-    background: #bdd5d4;
+    background: #1c3b3a;
     padding: 10px;
 }
 
@@ -137,7 +138,7 @@ header h1 {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #D3D3D3;  /* Light Gray */
+    background-color: #7ea88d;  /* Light Gray */
     overflow-x: hidden;
     padding-top: 60px;
     transform: translateX(-100%);  /* Hidden by default */
@@ -190,6 +191,7 @@ header h1 {
 .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    
     gap: 1rem;
     padding: 1rem;
 }

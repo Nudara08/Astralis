@@ -81,7 +81,7 @@ app.get("/event/:id", (req, res) => {
 
 app.get("/api/event/:id", (req, res) => {
     const id = req.params.id;
-    db.get("SELECT * FROM Events WHERE id = ?", [id], (err, row) => {
+    db.get("SELECT * FROM Events WHERE eventID = ?", [id], (err, row) => {
         if (err) {
             console.error("Database error:", err);
             return res.status(500).json({ error: err.message });

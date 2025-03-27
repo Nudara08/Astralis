@@ -31,7 +31,7 @@ function appendData(data) {
         <h1 class="card-name">${name}</h1>
         <p class="card-date">${event_date}</p>
         <p class="card-time">${time}</p>
-        <a class="card-link" href="${hyperlink}"><button class="btn">Read More</button></a>
+        <a class="card-link" href="${"/event/" + eventID}"><button class="btn">Read More</button></a>
         </div>
         `;
     });
